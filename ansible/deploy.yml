@@ -1,0 +1,40 @@
+- name: Déploiement du site IMCP dans un conteneur Docker
+  hosts: web
+  become: true
+
+  vars:
+    app_dir: /opt/siteweb
+    image_name: siteweb-imcp
+    container_name: siteweb
+
+  tasks:
+    - name: Vérifier que Docker est démarré
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Créer le dossier de l'application
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+
+    - name: Copier les fichiers du site
+      copy:
+        src: "{{ playbook_dir }}/../siteweb/"
+        dest: "{{ app_dir }}/siteweb/"
+
+    - name: Copier le Dockerfile
+      copy:
+        src: "{{ playbook_dir }}/../Dockerfile"
+        dest: "{{ app_dir }}/Dockerfile"
+
+    - name: Construire l'image Docker
+      command: docker build -t {{ image_name }} {{ app_dir }}
+
+    - name: Supprimer l'ancien conteneur s'il existe
+      command: docker rm -f {{ container_name }}
+      failed_when: false
+
+    - name: Lancer le conteneur sur le port 80
+      command: docker run -d -p 80:80 --name {{ container_name }} --restart always {{ image_name }}
