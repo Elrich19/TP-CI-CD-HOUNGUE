@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMCP – TP CI/CD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">imcp</div>
+    <span class="badge" id="version">Version v1</span>
+  </header>
+
+  <section class="hero">
+    <h1>Chaîne CI/CD</h1>
+    <p>Jenkins · Ansible · Docker</p>
+    <small>TP DevOps – Déploiement automatisé d'un site web</small>
+  </section>
+
+  <section class="pipeline">
+    <div class="step">1<br><span>GitHub</span></div>
+    <div class="arrow">→</div>
+    <div class="step">2<br><span>Jenkins</span></div>
+    <div class="arrow">→</div>
+    <div class="step">3<br><span>Ansible</span></div>
+    <div class="arrow">→</div>
+    <div class="step">4<br><span>Docker</span></div>
+  </section>
+
+  <section class="cards">
+    <article class="card">
+      <h2>Jenkins</h2>
+      <p>Serveur d'intégration continue. Il détecte chaque push via un webhook GitHub et lance le pipeline.</p>
+    </article>
+    <article class="card">
+      <h2>Ansible</h2>
+      <p>Outil d'automatisation. Il se connecte en SSH au serveur cible pour copier le site et lancer le conteneur.</p>
+    </article>
+    <article class="card">
+      <h2>Docker</h2>
+      <p>Le site est servi par Nginx dans un conteneur, exposé sur le port 80.</p>
+    </article>
+  </section>
+
+  <footer>
+    <p>Groupe : Nom 1 · Nom 2 · Nom 3</p>
+    <p id="date"></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
